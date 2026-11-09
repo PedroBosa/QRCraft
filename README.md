@@ -1,141 +1,271 @@
-# QRCraft Studio
+# QRCraft
 
-<div align="center">
-
-[![Live Demo](https://img.shields.io/badge/Demo-Online%20(GitHub%20Pages)-58DB91?style=for-the-badge&logo=github)](https://pedrobosa.github.io/QRCraft/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-C77DFF?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Author](https://img.shields.io/badge/Author-PedroBosa-4F46E5?style=for-the-badge&logo=github)](https://github.com/PedroBosa)
-
-<br />
-
-[![React 18](https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=flat&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
-[![Privacy: 100% Client-Side](https://img.shields.io/badge/Privacy-100%25%20Client--Side-58DB91?style=flat)](#)
-[![Zero-Backend](https://img.shields.io/badge/Zero--Backend-Offline%20First-22D3EE?style=flat)](#)
+> **Estúdio de engenharia e diagnóstico óptico de QR Codes com execução 100% no cliente. Construtor de payloads em conformidade com o padrão EMVCo/PIX BACEN, cálculo polinomial de redundância cíclica CRC16-CCITT, termômetro de escaneabilidade em tempo real e exportação gráfica em alta resolução.**
 
 <p align="center">
-  <strong>Estúdio profissional de alta densidade para engenharia, design e validação óptica de QR Codes.</strong><br>
-  100% Client-Side (Zero-Backend) • Padrão Oficial PIX (BRCode EMV + CRC16) • Diagnóstico Óptico em Tempo Real • Exportação até 4K, Vetor SVG e PDF A4.
+  <a href="https://pedrobosa.github.io/QRCraft/"><img alt="Demo ao vivo" src="https://img.shields.io/badge/Demo-Online-58DB91?style=for-the-badge&logo=github"></a>
+  <a href="LICENSE"><img alt="Licença: MIT" src="https://img.shields.io/badge/Licen%C3%A7a-MIT-6366F1?style=for-the-badge"></a>
+  <a href="https://github.com/PedroBosa"><img alt="Autor: Pedro Bosa" src="https://img.shields.io/badge/Autor-Pedro%20Bosa-4F46E5?style=for-the-badge&logo=github"></a>
 </p>
 
-</div>
+<p align="center">
+  <img alt="React 18" src="https://img.shields.io/badge/React-18.3-61DAFB?style=flat&logo=react">
+  <img alt="TypeScript 5.4" src="https://img.shields.io/badge/TypeScript-5.4-3178C6?style=flat&logo=typescript">
+  <img alt="Vite 5" src="https://img.shields.io/badge/Vite-5.2-646CFF?style=flat&logo=vite">
+  <img alt="Tailwind CSS 3.4" src="https://img.shields.io/badge/Tailwind%20CSS-3.4-38B2AC?style=flat&logo=tailwindcss">
+  <img alt="Status do CI" src="https://github.com/PedroBosa/QRCraft/actions/workflows/ci.yml/badge.svg">
+</p>
 
 ---
 
-## ⚡ Por que o QRCraft?
+## Visão geral
 
-A maioria dos geradores de QR Code online sofre de problemas graves: armazenam dados sensíveis em servidores desconhecidos, dependem de APIs lentas, inserem rastreadores não solicitados ou cobram assinaturas para downloads em alta definição.
+O **QRCraft** é uma ferramenta para geração, parametrização estética e validação computacional de códigos bidimensionais (QR Code padrão ISO/IEC 18004).
 
-O **QRCraft Studio** foi projetado seguindo as diretrizes visuais da **Linear, Vercel Geist e Raycast**, unindo privacidade absoluta a ferramentas avançadas de design:
+A maior parte dos serviços web de geração de QR Codes introduz vulnerabilidades operacionais e de privacidade: redirecionamentos arbitrários por meio de URLs intermediárias encurtadas, envio de credenciais de acesso ou dados bancários para servidores desconhecidos, inserção compulsória de logotipos comerciais e rasterização em baixa resolução inviável para aplicação gráfica industrial.
 
-- **🔒 Privacidade Total (Zero-Backend):** Todos os dados (chaves financeiras, senhas Wi-Fi, contatos pessoais) são compilados estritamente na memória do seu navegador. Zero chamadas a servidores externos.
-- **🇧🇷 Padrão Oficial PIX (Banco Central):** Algoritmo próprio em conformidade com o padrão EMVCo, com sanitização de chaves, campos TLV (*Tag-Length-Value*) e cálculo matemático do polinômio `CRC16-CCITT` (`0x1021`, Init `0xFFFF`).
-- **🔬 Termômetro de Legibilidade Óptica (Scannability Gauge):** Análise em tempo real baseada em WCAG 2.1 (luminância relativa, contraste no pior caso de gradientes e oclusão de logo central contra a capacidade da matriz Reed-Solomon `L`, `M`, `Q` ou `H`).
-- **📷 Validador Óptico Computacional:** Decodificador nativo em tempo real (`html5-qrcode`) que decodifica o canvas gerado ou acessa a webcam para provar matematicamente a legibilidade antes da impressão.
-- **📐 Exportação Gráfica Industrial:**
-  - **Raster:** PNG e WebP em **1K (1024px)**, **2K (2048px)** e **4K (4096px)** com escala proporcional milimétrica.
-  - **Vetor SVG Limpo:** Código SVG sem resíduos de DOM, pronto para edição no Figma e Adobe Illustrator.
-  - **Área de Transferência:** Cópia instantânea da imagem PNG com 1 clique (Clipboard API).
-  - **Folhas PDF de Impressão (A4):** Diagramação automática para Display/Placa de Balcão única ou Grade 3x4 (12 adesivos prontos para recorte).
+O QRCraft processa toda a compilação de payloads, desenho vetorial dos módulos e diagnóstico óptico diretamente na memória do navegador do usuário. A aplicação opera sem componentes de backend, sem transmissão de telemetria e sem dependência de serviços externos para compor ou validar os códigos gerados.
 
 ---
 
-## 🛠️ Suporte Completo a 6 Payloads Inteligentes
+## Destaques de engenharia
 
-| Tipo de Payload | Funcionalidades Especiais | Padrão / Protocolo |
-| :--- | :--- | :--- |
-| **URL / Link** | Suporte a construtor de parâmetros de rastreamento de marketing (UTM). | `https://` RFC 3986 |
-| **PIX (BRCode)** | Seleção de chave (CPF, CNPJ, Telefone E.164, E-mail, EVP), TxID, valor e CRC16. | Banco Central do Brasil / EMVCo |
-| **Wi-Fi** | Redes WPA/WPA2, WEP ou Abertas, com suporte a rede oculta e teste de senha. | Protocolo `WIFI:S:...;` |
-| **vCard 3.0** | Cartão de contato completo com nome, cargo, empresa, telefones, e-mail e endereço. | RFC 2426 (vCard 3.0) |
-| **WhatsApp** | Link direto de conversa com DDI, DDD e mensagem automática pré-preenchida. | RFC 3986 / API WhatsApp |
-| **Evento (iCal)** | Agendamento de compromissos com data/hora UTC, local e descrição detalhada. | RFC 5545 (iCalendar 2.0) |
+### 1. Construtor de payloads EMVCo / PIX (Banco Central do Brasil)
+A geração de códigos para pagamentos instantâneos (PIX) implementa rigorosamente a especificação do manual de padrões do Banco Central do Brasil baseada no formato internacional EMVCo (*EMV Integrated Circuit Card Specifications for Payment Systems*).
+
+A estrutura opera sobre o modelo de dados TLV (*Tag-Length-Value*), onde cada elemento possui um identificador numérico de 2 dígitos, um indicador de comprimento de 2 dígitos e o conteúdo serializado:
+
+$$\text{Campo TLV} = \text{Tag}_{(2)} \,\|\, \text{Tamanho}_{(2)} \,\|\, \text{Valor}_{(N)}$$
+
+O payload estático consolida os seguintes nós normativos:
+- **Tag 00 (Payload Format Indicator):** valor constante `01`.
+- **Tag 26 (Merchant Account Information):** subtag `00` (`br.gov.bcb.pix`), subtag `01` (chave PIX normalizada de acordo com seu domínio: dígitos brutos para CPF/CNPJ, padrão internacional E.164 `+55...` para telefones móveis, minúsculas para e-mail ou UUID padrão para EVP) e subtag opcional `02` (descrição informativa sanitizada, máx. 40 caracteres).
+- **Tag 52 (Merchant Category Code):** código `0000` (padrão genérico).
+- **Tag 53 (Transaction Currency):** código numérico ISO 4217 `986` (Real Brasileiro - BRL).
+- **Tag 54 (Transaction Amount):** valor decimal com 2 casas de precisão (quando estipulado).
+- **Tag 58 (Country Code):** `BR`.
+- **Tag 59 (Merchant Name):** nome do recebedor sanitizado contra caracteres especiais e acentuações (máx. 25 caracteres).
+- **Tag 60 (Merchant City):** município de registro (máx. 15 caracteres).
+- **Tag 62 (Additional Data Field):** subtag `05` contendo o Identificador da Transação (TxID), aplicando `***` em identificadores anônimos.
+- **Tag 63 (CRC-16 Checksum):** preenchido com a assinatura matemática de 4 caracteres hexadecimais descrita a seguir.
+
+### 2. Algoritmo polinomial CRC-16-CCITT
+A integridade da cadeia de pagamento EMV é autenticada através do polinômio gerador padrão CCITT-FALSE com parâmetros:
+- **Polinômio:** $P(x) = x^{16} + x^{12} + x^5 + 1 \equiv \text{0x1021}$
+- **Valor inicial:** $\text{0xFFFF}$
+- **Operação de deslocamento:** shift à esquerda (*MSB-first*)
+- **Tamanho do campo:** 16 bits (4 caracteres hexadecimais em maiúsculas)
+
+O processo de cálculo itera sobre cada caractere $c$ do payload antecedido pelo prefixo `6304`:
+
+$$\text{crc} \leftarrow \text{crc} \oplus (c \ll 8)$$
+
+Para cada um dos 8 bits:
+
+$$\text{crc} \leftarrow \begin{cases} (\text{crc} \ll 1) \oplus \text{0x1021}, & \text{se } (\text{crc} \ \& \ \text{0x8000}) \ne 0 \\[6pt] \text{crc} \ll 1, & \text{caso contrário} \end{cases}$$
+
+O valor final de 16 bits é mascarado com $\text{0xFFFF}$ e formatado como string hexadecimal de 4 dígitos com preenchimento à esquerda (`padStart(4, '0')`).
+
+### 3. Modelo de diagnóstico óptico de escaneabilidade
+O sistema executa auditoria sintética contínua sobre a configuração geométrica e visual do código:
+
+#### A. Contraste óptico WCAG 2.1 no pior caso de gradientes
+Para códigos com gradientes multiponto, todos os pontos de cor de primeiro plano ($\text{fg}_i$) e fundo ($\text{bg}_j$) têm sua luminância relativa calculada:
+
+$$C_{\text{lin}} = \begin{cases} \dfrac{C}{12.92}, & C \le 0.03928 \\[8pt] \left( \dfrac{C + 0.055}{1.055} \right)^{2.4}, & C > 0.03928 \end{cases}$$
+
+$$Y = 0.2126 R_{\text{lin}} + 0.7152 G_{\text{lin}} + 0.0722 B_{\text{lin}}$$
+
+A razão de contraste $C_r$ entre cada par é computada:
+
+$$C_r(\text{fg}_i, \text{bg}_j) = \frac{\max(Y_{\text{fg}}, Y_{\text{bg}}) + 0.05}{\min(Y_{\text{fg}}, Y_{\text{bg}}) + 0.05}$$
+
+O escore avalia o pior caso absoluto:
+
+$$C_{\text{worst}} = \min_{i, j} C_r(\text{fg}_i, \text{bg}_j)$$
+
+- Se $C_{\text{worst}} < 3.0$: penalidade crítica de $-50$ pontos.
+- Se $3.0 \le C_{\text{worst}} < 4.5$: penalidade de $-20$ pontos.
+- Se $Y_{\text{fg}} > Y_{\text{bg}}$ (módulos claros sobre fundo escuro): alerta de inversão de polaridade e penalidade de $-30$ pontos por risco de falha em scanners ópticos industriais de código de barras.
+
+#### B. Cobertura do logo central vs. capacidade Reed-Solomon
+A inserção de um logotipo central destrói parte da matriz bidimensional, exigindo compensação pelos blocos de correção de erro Reed-Solomon (*Error Correction Level* - ECL). A área de oclusão do logo normalizado em relação ao código é:
+
+$$A_{\text{logo}} = (\text{imageSize})^2$$
+
+Os limites máximos de segurança estrutural recomendados pelo algoritmo são:
+
+$$A_{\text{safe}}(ECL) = \begin{cases} 0.07 \; (7\%), & ECL = \text{L} \\ 0.15 \; (15\%), & ECL = \text{M} \\ 0.25 \; (25\%), & ECL = \text{Q} \\ 0.30 \; (30\%), & ECL = \text{H} \end{cases}$$
+
+Se $A_{\text{logo}} > A_{\text{safe}}$, calcula-se a penalidade proporcional de degradação:
+
+$$\Delta_{\text{excess}} = \frac{A_{\text{logo}} - A_{\text{safe}}}{A_{\text{safe}}}, \qquad P_{\text{logo}} = \min\left(45, \; \lfloor \Delta_{\text{excess}} \cdot 40 \rfloor \right)$$
+
+O escore final de escaneabilidade varia de $0$ a $100$, classificando o código entre *Crítico* ($<45$), *Atenção* ($45$–$69$), *Bom* ($70$–$89$) e *Excelente* ($90$–$100$).
+
+### 4. Validador óptico computacional no cliente
+Além da análise matemática estática, o QRCraft embute um pipeline de visão computacional em tempo real acionado pela biblioteca `html5-qrcode`. O validador obtém a matriz de pixels renderizada no `<canvas>` e a submete ao decodificador, confirmando a recuperação sem erro da cadeia binária antes de qualquer impressão ou exportação.
 
 ---
 
-## 🏛️ Arquitetura de Software
+## Recursos
 
-O código-fonte é estruturado em **Clean Architecture** e **Screaming Architecture**, separando regras matemáticas puras de componentes visuais:
+- **Compilação de payloads especializados:**
+  - **URL / Hyperlink:** construtor parametrizado com injeção de parâmetros UTM (*source*, *medium*, *campaign*, *term*, *content*).
+  - **PIX (BR Code):** normalização rigorosa de chaves e geração automática de checksum CRC16.
+  - **Wi-Fi:** formato `WIFI:T:...;S:...;P:...;H:...;;` para redes WPA, WPA2, WEP e abertas com opção de SSID oculto.
+  - **vCard 3.0:** cartão de contato corporativo (RFC 2426) contendo nome, empresa, cargo, múltiplos telefones, e-mail e URL.
+  - **WhatsApp:** links diretos de chat `https://wa.me/` com sanitização telefônica e codificação de mensagem pré-formatada via `encodeURIComponent`.
+  - **iCalendar 2.0:** agendamento de eventos corporativos e reuniões em formato UTC (RFC 5545).
+- **Estúdio de estilo vetorial:** seleção de geometrias de módulos (quadrado, pontos circulares, cantos arredondados), desenho personalizado dos olhos perimétricos (quadro e pupila com cores independentes) e gradientes lineares/radiais.
+- **Pipeline de exportação em múltiplos formatos:**
+  - Rasterização de bitmap nos formatos **PNG** e **WebP** em resoluções padronizadas de **1K (1024px)**, **2K (2048px)** e **4K (4096px)**.
+  - Geração de código vetorial **SVG** limpo e encapsulado, sem artefatos de DOM, permitindo importação direta em ferramentas de edição gráfica vetorial.
+  - Cópia direta da imagem PNG para a área de transferência (`ClipboardItem`).
+  - Geração de folhas de impressão em formato **PDF A4** via `jsPDF`, oferecendo dois esquemas de diagramação: Display individual de balcão ou grade $3 \times 4$ contendo 12 adesivos com linhas guias para corte.
+
+---
+
+## Privacidade e segurança
+
+- **Processamento 100% isolado no cliente:** chaves bancárias, senhas de redes Wi-Fi e listas de contatos nunca deixam a máquina do usuário.
+- **Sem rastreadores ou redirecionamentos:** os códigos gerados apontam diretamente para o destino especificado, sem o uso de domínios intermediários de monitoramento.
+- **Fontes locais:** as declarações de tipografia utilizam a pilha instalada no sistema operacional (`Plus Jakarta Sans`, `Inter`, `JetBrains Mono`), sem comunicação com servidores de fontes externos (Google Fonts ou CDNs).
+- **Armazenamento seguro:** históricos de templates e rascunhos são armazenados exclusivamente na chave local do navegador via `localStorage` (`qrcraft-storage`).
+- **Validação de câmera segura:** o decodificador computacional opera estritamente na memória volátil de processamento de quadros de vídeo, sem armazenar imagens em disco.
+
+---
+
+## Estrutura do projeto
 
 ```text
-src/
-├── core/                # Regras de Negócio Puras (Zero dependências de UI)
-│   ├── algorithms/      # CRC16-CCITT, Luminância WCAG e Matriz de Escaneabilidade
-│   └── builders/        # Compiladores de Payload (PIX, Wi-Fi, vCard, UTM, iCal)
-├── modules/             # Camada de Apresentação e Módulos do Estúdio
-│   ├── payload-builder/ # Formulários inteligentes com formatação e máscaras
-│   ├── studio/          # Design Studio (geometrias, gradientes, olhos e logo)
-│   ├── preview/         # Canvas reativo, Validador Óptico e Termômetro
-│   ├── export/          # Motores gráficos (Canvas 4K, SVG limpo e jsPDF)
-│   └── presets-history/ # Galeria de templates e histórico local (LocalStorage)
-├── shared/              # Layout e componentes globais
-└── store/               # Gerenciamento de Estado Reativo (Zustand com persistência)
+QRCraft/
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.yml          # Formulário padronizado para relato de bugs
+│   │   ├── config.yml              # Configuração de issues e canal de segurança
+│   │   └── feature_request.yml     # Formulário padronizado para sugestões
+│   ├── workflows/
+│   │   ├── ci.yml                  # Validação estática de tipos e build em PRs
+│   │   └── deploy.yml              # Build e publicação no GitHub Pages
+│   ├── CODEOWNERS                  # Definição de propriedade de código (@PedroBosa)
+│   ├── dependabot.yml              # Atualização semanal de dependências npm e actions
+│   └── PULL_REQUEST_TEMPLATE.md    # Checklist de verificação para pull requests
+├── src/
+│   ├── core/                       # Núcleo algorítmico desacoplado de componentes visuais
+│   │   ├── algorithms/
+│   │   │   ├── crc16.ts            # Cálculo polinomial CRC16-CCITT (0x1021)
+│   │   │   ├── luminance.ts        # Cálculo de luminância relativa WCAG 2.1 e contraste
+│   │   │   └── scannability.ts     # Modelo de diagnóstico óptico de escaneabilidade
+│   │   └── builders/
+│   │       ├── emv-pix.ts          # Construtor TLV e sanitizador de payload PIX BACEN
+│   │       ├── ical.ts             # Construtor de eventos padrão iCalendar 2.0
+│   │       ├── index.ts            # Ponto de exportação de construtores
+│   │       ├── utm.ts              # Construtor de parâmetros de rastreamento UTM
+│   │       ├── vcard.ts            # Compilador de cartões de contato vCard 3.0
+│   │       ├── whatsapp.ts         # Construtor de links diretos para a API do WhatsApp
+│   │       └── wifi.ts             # Compilador de protocolo de credenciais Wi-Fi
+│   ├── modules/                    # Módulos visuais e painéis do estúdio
+│   │   ├── export/                 # Motores de exportação gráfica (PNG, WebP, SVG, PDF A4)
+│   │   ├── payload-builder/        # Formulários reativos com máscaras de digitação
+│   │   ├── presets-history/        # Gestão de histórico local e modelos pré-definidos
+│   │   ├── preview/                # Palco de renderização, termômetro e validador óptico
+│   │   └── studio/                 # Controles de estilização de módulos, olhos e logo
+│   ├── shared/                     # Componentes utilitários de interface compartilhados
+│   ├── store/
+│   │   └── useQRStore.ts           # Gerenciamento de estado global com persistência Zustand
+│   ├── types/                      # Definições de tipos TypeScript e contratos de domínio
+│   ├── App.tsx                     # Componente raiz da aplicação
+│   ├── index.css                   # Definições base e classes utilitárias CSS
+│   └── main.tsx                    # Inicialização do React 18 no elemento do DOM
+├── .editorconfig                   # Padronização de indentação e formatação
+├── .gitattributes                  # Normalização de quebras de linha (LF)
+├── .gitignore                      # Exclusão de artefatos de compilação e dependências
+├── .nvmrc                          # Versão recomendada do Node.js (22)
+├── CHANGELOG.md                    # Histórico de alterações seguindo Keep a Changelog
+├── CODE_OF_CONDUCT.md              # Código de conduta Contributor Covenant 2.1
+├── CONTRIBUTING.md                 # Diretrizes para desenvolvimento e contribuição
+├── index.html                      # Ponto de entrada HTML estruturado
+├── LICENSE                         # Licença permissiva MIT
+├── package.json                    # Metadados e scripts de automação
+├── postcss.config.js               # Configuração do PostCSS
+├── README.md                       # Documentação técnica central
+├── SECURITY.md                     # Diretrizes de segurança e canal confidencial
+├── tailwind.config.js              # Configurações de tema e tokens do Tailwind CSS
+├── tsconfig.json                   # Configuração estrita do compilador TypeScript
+├── tsconfig.node.json              # Configuração TypeScript para ferramentas de build
+└── vite.config.ts                  # Configuração do Vite e agrupamento de chunks manuais
 ```
 
 ---
 
-## 💻 Como Rodar Localmente
+## Primeiros passos
 
 ### Pré-requisitos
-- [Node.js](https://nodejs.org/) versão 18 ou superior
-- Gerenciador de pacotes `npm`, `pnpm` ou `yarn`
+- Node.js versão 20 LTS ou 22 LTS (verifique com `node --version`).
+- npm versão 10 ou superior.
 
-### Passo a Passo
-
+### Instalação e execução
 ```bash
-# 1. Clone o repositório
 git clone https://github.com/PedroBosa/QRCraft.git
-
-# 2. Acesse a pasta do projeto
 cd QRCraft
-
-# 3. Instale as dependências
-npm install
-
-# 4. Inicie o servidor de desenvolvimento
+npm ci
 npm run dev
 ```
 
-Acesse em seu navegador: `http://localhost:5173`.
-
-### Build de Produção
-
+### Build e verificação
 ```bash
+npm run typecheck
 npm run build
+npm run preview
 ```
 
-Os artefatos estáticos otimizados serão compilados na pasta `dist/`.
+---
+
+## Compatibilidade
+
+| Navegador / Plataforma | Suporte | Observações |
+|---|---|---|
+| Google Chrome / Chromium $\ge 108$ | Integral | Aceleração completa de canvas, acesso a câmera via `getUserMedia` e geração 4K. |
+| Microsoft Edge $\ge 108$ | Integral | Suporte integral equivalente à plataforma Chromium. |
+| Mozilla Firefox $\ge 115$ | Integral | Suporte completo; geração de PDFs de múltiplas páginas com excelente estabilidade. |
+| Apple Safari $\ge 16.4$ | Integral | `ClipboardItem` requer contexto seguro (HTTPS/localhost); decodificação de câmera sujeita a permissões do sistema. |
+| Dispositivos Móveis | Suporte responsivo | Interface totalmente responsiva; o validador óptico opera diretamente com a câmera traseira do aparelho. |
 
 ---
 
-## 🚀 Deploy Automatizado no GitHub Pages
+## Stack e tecnologias
 
-O projeto inclui um pipeline de **CI/CD via GitHub Actions** configurado em [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
-Para ativar o deploy no seu repositório:
-1. Vá em **Settings** > **Pages** no repositório do GitHub.
-2. Em **Build and deployment** > **Source**, selecione **GitHub Actions**.
-3. A cada `push` na branch `main`, o build será compilado e publicado automaticamente no link:
-   👉 `https://pedrobosa.github.io/QRCraft/`
-
----
-
-## 🎨 Design System & Estética
-
-- **Superfícies:** Tons ultra-escuros com acabamento monolítico (`#09090B`, `#0D0D10`).
-- **Linhas & Divisores:** Bordas sutis em `rgba(255, 255, 255, 0.06)`.
-- **Acentos:** Índigo Primário (`#4F46E5`), Roxo Destaque (`#9D4EDD`), Ciano (`#22D3EE`) e Verde Suave (`#58DB91`).
-- **Geometria:** Segmented controls com curvaturas concêntricas ($R_{inner} = R_{outer} - \text{padding}$).
-- **Scrollbars:** Barras ultrafinas de 6px e 3px sem setas nativas cinzas do sistema operacional.
+| Tecnologia | Versão | Função na arquitetura |
+|---|---|---|
+| React | 18.3.1 | Renderização declarativa da interface do usuário |
+| TypeScript | 5.4.5 | Tipagem estática estrita em toda a base de código |
+| Vite | 5.2.11 | Empacotador e servidor de desenvolvimento |
+| Zustand | 4.5.2 | Gerenciamento de estado global com middleware de persistência |
+| Tailwind CSS | 3.4.3 | Framework utilitário de estilização de interface |
+| qr-code-styling | 1.6.0-rc.1 | Motor gráfico para cálculo e renderização customizada dos módulos de QR Code |
+| html5-qrcode | 2.3.8 | Motor de visão computacional para decodificação óptica e validação em tempo real |
+| jsPDF | 2.5.1 | Mecanismo de diagramação vetorial e geração de folhas de impressão em formato PDF A4 |
+| Framer Motion | 11.2.10 | Biblioteca de transições e microinterações de interface |
+| Lucide React | 0.383.0 | Conjunto consistente de ícones técnicos de interface |
 
 ---
 
-## 📄 Licença
+## Limitações conhecidas
 
-Distribuído sob a licença **MIT**. Consulte o arquivo [LICENSE](LICENSE) para obter mais informações.
+- **Contexto seguro para acesso à câmera:** a validação óptica via webcam ou câmera do dispositivo móvel (`html5-qrcode`) exige contexto seguro (protocolo `https://` ou ambiente de desenvolvimento `localhost`), por imposição das especificações de segurança da API `MediaDevices.getUserMedia`.
+- **Uso de memória na rasterização 4K:** a exportação em resolução 4K ($4096 \times 4096\text{ px}$) gera um buffer gráfico de aproximadamente $67\text{ MB}$ não comprimido na memória volátil do navegador antes da codificação em PNG, podendo causar engasgos temporários em dispositivos com baixo limite de memória RAM compartilhada.
+- **Precisão dimensional em impressão PDF:** a renderização milimétrica de etiquetas e folhas A4 via `jsPDF` pressupõe escala de impressão a $100\%$ no visualizador de PDFs; caso a impressora física aplique redimensionamento do tipo "Ajustar à página" (*Fit to Page*), pode ocorrer variação marginal nas margens externas de corte.
 
-<div align="center">
-  Feito com dedicação por <a href="https://github.com/PedroBosa">Pedro Bosa</a>
-</div>
+---
+
+## Contribuindo
+
+Contribuições que ampliem a conformidade com normas técnicas ou aprimorem o algoritmo de diagnóstico óptico são bem-vindas. Consulte o guia detalhado em [`CONTRIBUTING.md`](CONTRIBUTING.md) antes de enviar alterações. Relatos de falhas de segurança devem seguir a política em [`SECURITY.md`](SECURITY.md).
+
+---
+
+## Licença
+
+Distribuído sob a licença MIT. Consulte [`LICENSE`](LICENSE) para mais informações.<br>
+Desenvolvido por [Pedro Bosa](https://github.com/PedroBosa).
