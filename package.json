@@ -1,12 +1,43 @@
 {
   "name": "qrcraft-studio",
-  "private": true,
   "version": "1.0.0",
+  "description": "Estúdio de engenharia e diagnóstico óptico de QR Codes 100% no cliente. Construtor de payloads EMV PIX com cálculo CRC16, termômetro de escaneabilidade WCAG e exportação vetorial e 4K.",
+  "author": {
+    "name": "Pedro Bosa",
+    "url": "https://github.com/PedroBosa"
+  },
+  "license": "MIT",
+  "homepage": "https://pedrobosa.github.io/QRCraft/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PedroBosa/QRCraft.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PedroBosa/QRCraft/issues"
+  },
+  "keywords": [
+    "qr-code",
+    "pix-emv",
+    "crc16",
+    "brcode",
+    "scannability",
+    "wcag",
+    "optical-validation",
+    "react",
+    "typescript",
+    "vite",
+    "tailwind"
+  ],
+  "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b"
   },
   "dependencies": {
     "clsx": "^2.1.1",
