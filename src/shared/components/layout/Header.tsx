@@ -82,11 +82,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenHistory, onOpenValidator }
           <div className="h-4 w-[1px] bg-white/[0.08] mx-0.5" />
 
           <a
-            href="https://github.com"
+            href="https://github.com/PedroBosa/QRCraft"
             target="_blank"
             rel="noreferrer"
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 transition-colors hover:border-white/[0.16] hover:bg-white/[0.08] hover:text-white"
-            title="GitHub"
+            title="Ver no GitHub (Repositório Oficial)"
           >
             <Github className="h-4 w-4" strokeWidth={1.75} />
           </a>
