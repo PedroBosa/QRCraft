@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.5%;     /* #09090B Profundo */
+    --foreground: 0 0% 98%;          /* Branco Puro */
+
+    --card: 240 8% 6%;              /* #0D0D10 Superfície Unificada Linear/Geist */
+    --card-foreground: 0 0% 98%;
+
+    --border: 240 5% 15%;           /* Linhas ultra-sutis */
+    --input: 240 6% 12%;
+    --ring: 245 78% 60%;            /* Foco no Índigo */
+
+    --radius: 0.625rem;
+  }
+
+  * {
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-secondary/30 selection:text-white min-h-screen overflow-x-hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Otimização de renderização nítida de vetores e ícones SVG */
+  svg {
+    shape-rendering: geometricPrecision;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Garante que o canvas do QR Code seja 100% responsivo e nunca estoure o container em telas mobile */
+  #qr-canvas-container canvas,
+  .qr-preview-canvas canvas {
+    max-width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+    display: block !important;
+  }
+
+  /* Elimina spinner branco nativo de inputs type=number */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield !important;
+  }
+}
+
+/* ==========================================================================
+   SISTEMA GLOBAL DE SCROLLBAR PADRONIZADO (Linear / Vercel / Raycast Style)
+   Substitui permanentemente a barra cinza/preta e setas nativas do Windows
+   ========================================================================== */
+
+/* Padrão W3C para Firefox e navegadores com suporte a scrollbar moderna */
+html, body {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(255, 255, 255, 0.18) #09090B !important;
+}
+
+/* Dimensões do scrollbar em toda a aplicação (vertical e horizontal) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+/* Trilho com o fundo idêntico ao dark theme (#09090B) */
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  background: #09090B !important;
+}
+
+/* Polegar do scroll: pílula translúcida elegante e arredondada */
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  transition: background 0.2s ease !important;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover,
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28) !important;
+}
+
+html::-webkit-scrollbar-thumb:active,
+body::-webkit-scrollbar-thumb:active,
+*::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.42) !important;
+}
+
+/* Remove permanentemente botões de seta superior, inferior e cantos */
+html::-webkit-scrollbar-button,
+body::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-corner {
+  background: #09090B !important;
+}
+
+@layer utilities {
+  .bg-grid-subtle {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* Micro-scrollbar ultrafina para trilhos horizontais específicos */
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 3px !important;
+    width: 3px !important;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 9999px !important;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-radius: 9999px !important;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.32) !important;
+  }
+
+  /* Utilitário para ocultar scrollbars */
+  .no-scrollbar::-webkit-scrollbar,
+  .scrollbar-none::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .no-scrollbar,
+  .scrollbar-none {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+}
