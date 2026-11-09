@@ -1,9 +1,9 @@
-# QRCraft
+# QRCraft Studio
 
 > **Estúdio de engenharia e diagnóstico óptico de QR Codes com execução 100% no cliente. Construtor de payloads em conformidade com o padrão EMVCo/PIX BACEN, cálculo polinomial de redundância cíclica CRC16-CCITT, termômetro de escaneabilidade em tempo real e exportação gráfica em alta resolução.**
 
 <p align="center">
-  <a href="https://pedrobosa.github.io/QRCraft/"><img alt="Demo ao vivo" src="https://img.shields.io/badge/Demo-Online-58DB91?style=for-the-badge&logo=github"></a>
+  <a href="https://pedrobosa.github.io/QRCraft/"><img alt="Demo ao vivo" src="https://img.shields.io/badge/Demo-Online-10B981?style=for-the-badge&logo=github"></a>
   <a href="LICENSE"><img alt="Licença: MIT" src="https://img.shields.io/badge/Licen%C3%A7a-MIT-6366F1?style=for-the-badge"></a>
   <a href="https://github.com/PedroBosa"><img alt="Autor: Pedro Bosa" src="https://img.shields.io/badge/Autor-Pedro%20Bosa-4F46E5?style=for-the-badge&logo=github"></a>
 </p>
@@ -69,7 +69,7 @@ O valor final de 16 bits é mascarado com $\text{0xFFFF}$ e formatado como strin
 ### 3. Modelo de diagnóstico óptico de escaneabilidade
 O sistema executa auditoria sintética contínua sobre a configuração geométrica e visual do código:
 
-#### A. Contraste óptico WCAG 2.1 no pior caso de gradientes
+**Contraste óptico WCAG 2.1 no pior caso de gradientes:**  
 Para códigos com gradientes multiponto, todos os pontos de cor de primeiro plano ($\text{fg}_i$) e fundo ($\text{bg}_j$) têm sua luminância relativa calculada:
 
 $$C_{\text{lin}} = \begin{cases} \dfrac{C}{12.92}, & C \le 0.03928 \\[8pt] \left( \dfrac{C + 0.055}{1.055} \right)^{2.4}, & C > 0.03928 \end{cases}$$
@@ -88,7 +88,7 @@ $$C_{\text{worst}} = \min_{i, j} C_r(\text{fg}_i, \text{bg}_j)$$
 - Se $3.0 \le C_{\text{worst}} < 4.5$: penalidade de $-20$ pontos.
 - Se $Y_{\text{fg}} > Y_{\text{bg}}$ (módulos claros sobre fundo escuro): alerta de inversão de polaridade e penalidade de $-30$ pontos por risco de falha em scanners ópticos industriais de código de barras.
 
-#### B. Cobertura do logo central vs. capacidade Reed-Solomon
+**Cobertura do logo central vs. capacidade Reed-Solomon:**  
 A inserção de um logotipo central destrói parte da matriz bidimensional, exigindo compensação pelos blocos de correção de erro Reed-Solomon (*Error Correction Level* - ECL). A área de oclusão do logo normalizado em relação ao código é:
 
 $$A_{\text{logo}} = (\text{imageSize})^2$$
@@ -267,5 +267,6 @@ Contribuições que ampliem a conformidade com normas técnicas ou aprimorem o a
 
 ## Licença
 
-Distribuído sob a licença MIT. Consulte [`LICENSE`](LICENSE) para mais informações.<br>
+Distribuído sob a licença MIT. Consulte [`LICENSE`](LICENSE) para mais informações.
+
 Desenvolvido por [Pedro Bosa](https://github.com/PedroBosa).
