@@ -16,6 +16,10 @@
   <img alt="Status do CI" src="https://github.com/PedroBosa/QRCraft/actions/workflows/ci.yml/badge.svg">
 </p>
 
+<p align="center">
+  <img src="docs/images/demo.gif" alt="Demonstração do QRCraft Studio em funcionamento" width="850">
+</p>
+
 ---
 
 ## Visão geral
